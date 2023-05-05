@@ -9,7 +9,7 @@ Diese API ist ein Backend für eine Lernbeurteilung. Folgende Schritte müssen u
 * Autor: Robin Trachsel
 * Entwicklungsumgebung: Visual Studio Code
 * Version: 1.0.0
-
+* Git-Log: log.txt
 
 # 2. Installation
 * Installiere Node.js und npm auf deinem Computer.
