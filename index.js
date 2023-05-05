@@ -102,6 +102,42 @@ app.delete('/tasks/:id', (req, res) => {
     });
 });
 
+// Anforderungen an die Authentifizierung
+
+app.post('/login', (req, res) => {
+    logRequest(req, res, () => {
+        const email = req.query.email.toLowerCase();
+        if (!email.match(/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/)) {
+            res.status(400).json({ error: 'Invalid email' });
+            return;
+        }
+        const password = req.query.password;
+        if (email === email && password === 'm295') { // das zweite "email" steht da um jede Eingabe zu akzeptieren
+            req.session.email = email;
+            res.status(200).json({ email: req.session.email });
+        } else {
+            res.status(401).json({ error: 'Invalid credentials' });
+        }
+    });
+});
+
+app.get('/verify', (req, res) => {
+    logRequest(req, res, () => {
+        if (req.session.email) {
+            res.sendStatus(204);
+        } else {
+            res.status(401).json({ error: 'Not logged in' });
+        }
+    });
+});
+
+app.delete('/logout', (req, res) => {
+    logRequest(req, res, () => {
+        req.session.destroy();
+        res.status(200).json({ message: 'Logged out' });
+    });
+});
+
 app.listen(port, () => {
     console.clear();
     console.log(
