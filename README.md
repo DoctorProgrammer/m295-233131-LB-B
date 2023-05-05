@@ -1,6 +1,3 @@
-    TESTING.md beschreiben die Testfälle
-    Versionskontrolle, Git-Log: git log > log.txt
-
 # m295-233131-LB-B
 ZLI-Modul 02.05.23. - 05-05.23. Lernbeurteilung Teil B<br>
 Diese API ist ein Backend für eine Lernbeurteilung. Folgende Schritte müssen unternommen werden, um diese API zu verwenden:
@@ -17,14 +14,14 @@ Diese API ist ein Backend für eine Lernbeurteilung. Folgende Schritte müssen u
 * Öffne die Konsole und navigiere in den Ordner, in den das Repository geklont wurde.
 * Gib "npm install" ein, um die benötigten Abhängigkeiten zu installieren.
 # 3. Verwendung
-[GET /tasks](<#get-tasks>)<br>
-[POST /tasks](<#post-tasks>)<br>
-[GET /tasks/:id](<#get-tasksid>)<br>
-[PUT /tasks/:id](<#put-tasksid>)<br>
-[DELETE /tasks/:id](<#delete-tasksid>)<br>
-[POST /login](<#post-login>)<br>
-[GET /verify](<#get-verify>)<br>
-[DELETE /logout](<#delete-logout>)<br>
+[GET /tasks](<#get-tasks>) | 
+[POST /tasks](<#post-tasks>) | 
+[GET /tasks/:id](<#get-tasksid>) | 
+[PUT /tasks/:id](<#put-tasksid>) | 
+[DELETE /tasks/:id](<#delete-tasksid>) | 
+[POST /login](#post-login) | 
+[GET /verify](<#get-verify>) | 
+[DELETE /logout](<#delete-logout>)
 * Starte die API mit dem Befehl "node index.js".
 * Öffne einen Webbrowser und navigiere zu "http://localhost:3000".
 * Du kannst auf folgende Endpunkte zugreifen:
@@ -106,4 +103,4 @@ http://localhost:3000/logout
 # 4. Testen
 * Die Testfälle sind in der Datei "TESTING.md" beschrieben. Lesen Sie diese Anleitung sorgfältig durch, um sicherzustellen, dass alle Funktionen korrekt funktionieren.
 # 5. Quellen
-Diese API wurde von Robin Trachsel erstellt und ist Teil einer Lernbeurteilung.
+Diese API wurde von Robin Trachsel erstellt und ist Teil einer Leistungsbeurteilung.
