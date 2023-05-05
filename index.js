@@ -62,13 +62,14 @@ app.get('/tasks', (req, res) => {
 app.post('/tasks', (req, res) => {
   logRequest(req, res, () => {
     if (!checkLoggedIn(req, res)) return
-    if (req.query.title === undefined) {
+    const { title } = req.body
+    if (title === undefined) {
       res.status(406).json({ error: 'No title' })
       return
     }
     const task = {
       id: tasks.length + 1,
-      title: req.query.title,
+      title: title,
       createdOn: new Date(),
       finishedOn: undefined
     }
@@ -95,13 +96,14 @@ app.put('/tasks/:id', (req, res) => {
     if (!checkLoggedIn(req, res)) return
     const id = req.params.id
     const task = tasks.filter((task) => task.id === parseInt(id))
-    task[0].title = req.query.title
-    if (req.query.finished) {
+    const { title, finished } = req.body
+    task[0].title = title
+    if (finished) {
       task[0].finishedOn = new Date()
     }
     if (task.length === 0) {
       res.sendStatus(404)
-    } else if (task[0].title === undefined) {
+    } else if (title === undefined) {
       res.status(406).json({ error: 'No title' })
     } else {
       res.status(201).send(task)
@@ -130,8 +132,8 @@ app.delete('/tasks/:id', (req, res) => {
 
 app.post('/login', (req, res) => {
   logRequest(req, res, () => {
-    const email = req.query.email.toLowerCase()
-    const password = req.query.password
+    const email = req.body.email.toLowerCase()
+    const password = req.body.password
     if (!email.match(/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/)) {
       res.status(401).json({ error: 'Invalid email' })
       return
