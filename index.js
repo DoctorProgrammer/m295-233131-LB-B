@@ -38,13 +38,13 @@ function checkLoggedIn (req, res) {
 let tasks = [
   {
     id: 1,
-    text: 'Task 1',
+    title: 'Task 1',
     createdOn: new Date(),
     finishedOn: undefined
   },
   {
     id: 2,
-    text: 'Task 2',
+    title: 'Task 2',
     createdOn: new Date(),
     finishedOn: undefined
   }
@@ -62,9 +62,13 @@ app.get('/tasks', (req, res) => {
 app.post('/tasks', (req, res) => {
   logRequest(req, res, () => {
     if (!checkLoggedIn(req, res)) return
+    if (req.query.title === undefined) {
+      res.status(406).json({ error: 'No title' })
+      return
+    }
     const task = {
       id: tasks.length + 1,
-      text: req.query.text,
+      title: req.query.title,
       createdOn: new Date(),
       finishedOn: undefined
     }
@@ -91,14 +95,14 @@ app.put('/tasks/:id', (req, res) => {
     if (!checkLoggedIn(req, res)) return
     const id = req.params.id
     const task = tasks.filter((task) => task.id === parseInt(id))
-    task[0].text = req.query.text
+    task[0].title = req.query.title
     if (req.query.finished) {
       task[0].finishedOn = new Date()
     }
     if (task.length === 0) {
       res.sendStatus(404)
-    } else if (task[0].text === undefined) {
-      res.sendStatus(406)
+    } else if (task[0].title === undefined) {
+      res.status(406).json({ error: 'No title' })
     } else {
       res.status(201).send(task)
     }
@@ -153,8 +157,17 @@ app.get('/verify', (req, res) => {
 
 app.delete('/logout', (req, res) => {
   logRequest(req, res, () => {
+    if (!checkLoggedIn(req, res)) return
     req.session.destroy()
     res.sendStatus(204)
+  })
+})
+
+// Zusätzliche Anforderungen
+
+app.all('*', (req, res) => {
+  logRequest(req, res, () => {
+    res.status(404).json({ error: 'Not found' })
   })
 })
 
