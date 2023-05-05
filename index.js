@@ -134,7 +134,7 @@ app.get('/verify', (req, res) => {
 app.delete('/logout', (req, res) => {
     logRequest(req, res, () => {
         req.session.destroy();
-        res.status(200).json({ message: 'Logged out' });
+        res.sendStatus(204);
     });
 });
 
