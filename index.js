@@ -4,11 +4,6 @@
   date: 2020-03-26
   version: 0.0.1
   description: Backend für Lernbeurteilung Teil B
-
-  Readme:
-    Author, Entwicklungsumgebung, Version, Git-Repository, Beschreibung, Verwendung, Quellen
-    TESTING.md beschreiben die Testfälle
-    Versionskontrolle, Git-Log: git log > log.txt
 */
 
 const express = require('express')
